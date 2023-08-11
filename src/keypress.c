@@ -1,30 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   keypress.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: r-afonso < r-afonso@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/03 14:52:33 by r-afonso          #+#    #+#             */
-/*   Updated: 2023/08/10 22:58:16 by r-afonso         ###   ########.fr       */
+/*   Created: 2023/08/09 18:44:30 by r-afonso          #+#    #+#             */
+/*   Updated: 2023/08/10 22:53:05 by r-afonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SOLONG_H
-# define SOLONG_H
+#include "../include/so_long.h"
 
-# define MLX_ERROR 1
-# define WINDOW_WIDTH 1024
-# define WINDOW_HEIGHT 768
-
-# include "../MLX42/include/MLX42/MLX42.h"
-# include <X11/X.h>
-# include <X11/keysym.h>
-# include <stdarg.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-
-void	handle_keypress(mlx_key_data_t keydata, void* param);
-
-#endif
+void	handle_keypress(mlx_key_data_t keydata, void* param)
+{
+	// If we PRESS the 'J' key, print "Hello".
+	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
+		puts("Hello ");
+}

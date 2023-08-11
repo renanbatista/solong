@@ -1,14 +1,20 @@
+NAME = so_long
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-MFLAGS = -L./minilibx -lmlx -lXext -lX11
 RM = rm -f
-INC = -I./include
+INC = -I./include -I./MLX42/include/MLX42
+MLX42 = ./MLX42/build/libmlx42.a -ldl -lglfw -pthread -lm
 SRCS_DIR = ./src
-FILES = $(SRCS_DIR)/so_long.c
-OBJS = $(FILES:.c=.o)
+FILES = so_long
+OBJS = $(addprefix $(SRCS_DIR)/, $(addsuffix .o, $(FILES)))
 
-all:
-	$(CC) $(CFLAGS) $(FILES) $(INC) $(MFLAGS) -o so_long
+all: $(NAME)
+	
+%.o: %.c
+	$(CC) $(CFLAGS) $(INC) -c $< -o $@
+
+$(NAME): $(OBJS)
+	$(CC) $(OBJS) $(MLX42) $(CFLAGS) $(INC) -o $(NAME)
 
 bonus: all
 
