@@ -6,7 +6,7 @@
 /*   By: r-afonso < r-afonso@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 14:52:33 by r-afonso          #+#    #+#             */
-/*   Updated: 2023/08/10 22:58:16 by r-afonso         ###   ########.fr       */
+/*   Updated: 2023/08/17 21:22:33 by r-afonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,6 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-void	handle_keypress(mlx_key_data_t keydata, void* param);
+void	handle_keypress_esc(mlx_key_data_t keydata, void* mlx);
 
 #endif
