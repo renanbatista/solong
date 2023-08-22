@@ -6,7 +6,8 @@
 		"mlx42.h": "c",
 		"unistd.h": "c",
 		"string.h": "c",
-		"random": "c"
+		"random": "c",
+		"cstdint": "c"
 	},
 	"C_Cpp.default.configurationProvider": "ms-vscode.makefile-tools"
 }

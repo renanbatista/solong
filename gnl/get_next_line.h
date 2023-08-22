@@ -1,21 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   windows.c                                          :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: r-afonso < r-afonso@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/21 11:52:59 by r-afonso          #+#    #+#             */
-/*   Updated: 2023/08/21 11:54:55 by r-afonso         ###   ########.fr       */
+/*   Created: 2023/06/11 21:21:46 by r-afonso          #+#    #+#             */
+/*   Updated: 2023/06/11 21:27:32 by r-afonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	show_map_and_pac()
-{
-	
-}
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-void	move_pac()
-{
-	
-}
+# include <stdlib.h>
+# include <unistd.h>
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
+
+size_t	ft_strlen(char *str);
+char	*ft_strchr(char *s, int c);
+char	*ft_strjoin(char *s1, char *s2);
+char	*get_next_line(int fd);
+char	*allocate_char(size_t size);
+
+#endif

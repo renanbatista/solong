@@ -5,7 +5,7 @@ RM = rm -f
 INC = -I./include -I./MLX42/include/MLX42
 MLX42 = ./MLX42/build/libmlx42.a -ldl -lglfw -pthread -lm
 SRCS_DIR = ./src
-FILES = so_long keypress
+FILES = start keypress
 OBJS = $(addprefix $(SRCS_DIR)/, $(addsuffix .o, $(FILES)))
 
 all: $(NAME)
