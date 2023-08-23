@@ -6,7 +6,7 @@
 /*   By: r-afonso < r-afonso@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 14:52:33 by r-afonso          #+#    #+#             */
-/*   Updated: 2023/08/21 17:04:23 by r-afonso         ###   ########.fr       */
+/*   Updated: 2023/08/22 14:05:56 by r-afonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@
 typedef struct s_control
 {
 	mlx_t			*mlx;
-	mlx_image_t		*background_img;
-	mlx_image_t		*block_img;
-	mlx_image_t		*pac_img;
-	mlx_image_t		*exit_img;
-	mlx_image_t		*collectable_img;
+	mlx_image_t		*img_background;
+	mlx_image_t		*img_block;
+	mlx_image_t		*img_pac;
+	mlx_image_t		*img_exit;
+	mlx_image_t		*img_collectable;
 	char			**map;
 	char			**iso_map;
 	int32_t			map_col;
