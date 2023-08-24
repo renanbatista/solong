@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   start.c                                            :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: r-afonso < r-afonso@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/03 15:32:36 by r-afonso          #+#    #+#             */
-/*   Updated: 2023/08/24 17:11:12 by r-afonso         ###   ########.fr       */
+/*   Created: 2023/08/23 18:43:35 by r-afonso          #+#    #+#             */
+/*   Updated: 2023/08/24 14:51:34 by r-afonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 
-int	main(void)
+int	ft_strcmp(const char *str1, const char *str2)
 {
-	t_control	instance;
+	while (*str1 && *str2 && *str1 == *str2)
+	{
+		str1++;
+		str2++;
+	}
 
-	// printf("%s\n", getcwd(NULL, 4096));
-	instance.mlx = mlx_init(1024, 768, "Pac-Man", true);
-	load_images(&instance);
-	if (!instance.mlx)
-		exit(EXIT_FAILURE);
-	mlx_image_to_window(instance.mlx, instance.img_background, 0, 0);
-	mlx_key_hook(instance.mlx, &handle_keypress_esc, instance.mlx);
-	mlx_loop(instance.mlx);
-	mlx_terminate(instance.mlx);
-	return (0);
+	return (*str1 - *str2);
 }
