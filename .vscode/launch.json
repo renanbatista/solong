@@ -5,29 +5,13 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
-			"preLaunchTask": "build",
+			"preLaunchTask": "pretask",
 			"name": "(gdb) Launch",
-			"type": "cppdbg",
+			"type": "lldb",
 			"request": "launch",
 			"program": "${workspaceFolder}/so_long",
-			"args": [],
-			"stopAtEntry": false,
-			"cwd": "${fileDirname}/..",
-			"environment": [],
-			"externalConsole": false,
-			"MIMode": "gdb",
-			"setupCommands": [
-				{
-					"description": "Enable pretty-printing for gdb",
-					"text": "-enable-pretty-printing",
-					"ignoreFailures": true
-				},
-				{
-					"description": "Set Disassembly Flavor to Intel",
-					"text": "-gdb-set disassembly-flavor intel",
-					"ignoreFailures": true
-				}
-			],
+			"args": ["teste.ber", "1024", "768"],
+			"cwd": "${fileDirname}/.."
 		}
 	]
 }

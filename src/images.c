@@ -6,7 +6,7 @@
 /*   By: r-afonso < r-afonso@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 12:23:43 by r-afonso          #+#    #+#             */
-/*   Updated: 2023/08/24 16:31:53 by r-afonso         ###   ########.fr       */
+/*   Updated: 2023/08/28 18:17:08 by r-afonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	load_images(t_control *obj)
 	if (!obj->img_background || !obj->img_pac || !obj->img_block
 		|| !obj->img_collectable)
 		return ;
-	// mlx_resize_image(obj->img_background, 64, 64);
+	mlx_resize_image(obj->img_background, 30, 30);
 	// mlx_resize_image(obj->img_pac, 64, 64);
 	// mlx_resize_image(obj->img_block, 64, 64);
 	// mlx_resize_image(obj->img_collectable, 64, 64);

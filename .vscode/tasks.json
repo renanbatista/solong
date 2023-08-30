@@ -1,9 +1,9 @@
 {
     "tasks": [
         {
-            "type": "cppbuild",
-            "label": "build",
-            "command": "/usr/bin/gcc",
+            "type": "process",
+            "label": "pretask",
+            "command": "/usr/bin/clang",
             "args": [
                 "-fdiagnostics-color=always",
                 "-ldl",
@@ -15,6 +15,11 @@
                 "keypress.c",
                 "images.c",
                 "utils.c",
+                "windows.c",
+                "map.c",
+                "move.c",
+                "get_next_line_utils.c",
+                "get_next_line.c",
                 "../MLX42/build/libmlx42.a",
                 "-I./include",
                 "-I./MLX42/include/MLX42",

@@ -6,7 +6,7 @@
 /*   By: r-afonso < r-afonso@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 14:52:33 by r-afonso          #+#    #+#             */
-/*   Updated: 2023/08/24 14:44:17 by r-afonso         ###   ########.fr       */
+/*   Updated: 2023/08/29 15:55:48 by r-afonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,10 @@
 # define WINDOW_HEIGHT 768
 
 # include "../MLX42/include/MLX42/MLX42.h"
+# include "get_next_line.h"
 # include <X11/X.h>
 # include <X11/keysym.h>
+# include <fcntl.h>
 # include <stdarg.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -35,16 +37,20 @@ typedef struct s_control
 	mlx_image_t	*img_collectable;
 	char		**map;
 	char		**iso_map;
-	int32_t		map_col;
-	int32_t		map_row;
-	int32_t		player_x;
-	int32_t		player_y;
-	int32_t		window_w;
-	int32_t		window_h;
+	int			map_col;
+	int			map_row;
+	int			player_x;
+	int			player_y;
+	int			window_w;
+	int			window_h;
 }				t_control;
 
 void			handle_keypress_esc(mlx_key_data_t keydata, void *mlx);
 void			load_images(t_control *obj);
 int				ft_strcmp(const char *str1, const char *str2);
+size_t			ft_strlcpy(char *dst, char *src, size_t size);
+int				handle_initial_windows(t_control obj, int args_number,
+					char **args);
+int				ft_atoi(const char *nptr);
 
 #endif

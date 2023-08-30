@@ -5,7 +5,7 @@ RM = rm -f
 INC = -I./include -I./MLX42/include/MLX42
 MLX42 = ./MLX42/build/libmlx42.a -ldl -lglfw -pthread -lm
 SRCS_DIR = ./src
-FILES = start keypress images utils
+FILES = start windows keypress images utils map move get_next_line_utils get_next_line
 OBJS = $(addprefix $(SRCS_DIR)/, $(addsuffix .o, $(FILES)))
 
 all: $(NAME)

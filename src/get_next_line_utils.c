@@ -6,11 +6,11 @@
 /*   By: r-afonso < r-afonso@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 21:29:34 by r-afonso          #+#    #+#             */
-/*   Updated: 2023/06/13 10:22:47 by r-afonso         ###   ########.fr       */
+/*   Updated: 2023/08/28 18:26:52 by r-afonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "../include/get_next_line.h"
 
 size_t	ft_strlen(char *str)
 {

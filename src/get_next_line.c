@@ -6,11 +6,11 @@
 /*   By: r-afonso < r-afonso@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 21:29:58 by r-afonso          #+#    #+#             */
-/*   Updated: 2023/06/15 17:22:59 by r-afonso         ###   ########.fr       */
+/*   Updated: 2023/08/28 18:26:43 by r-afonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "../include/get_next_line.h"
 
 char	*get_read(int fd, char *save)
 {

@@ -6,24 +6,24 @@
 /*   By: r-afonso < r-afonso@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 15:32:36 by r-afonso          #+#    #+#             */
-/*   Updated: 2023/08/24 17:11:12 by r-afonso         ###   ########.fr       */
+/*   Updated: 2023/08/29 14:37:32 by r-afonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 
-int	main(void)
+int	main(int args_number, char **args)
 {
-	t_control	instance;
-
-	// printf("%s\n", getcwd(NULL, 4096));
-	instance.mlx = mlx_init(1024, 768, "Pac-Man", true);
-	load_images(&instance);
-	if (!instance.mlx)
+	
+	t_control	obj = {};
+	
+	handle_initial_windows(obj, args_number, args);
+	load_images(&obj);
+	if (!obj.mlx)
 		exit(EXIT_FAILURE);
-	mlx_image_to_window(instance.mlx, instance.img_background, 0, 0);
-	mlx_key_hook(instance.mlx, &handle_keypress_esc, instance.mlx);
-	mlx_loop(instance.mlx);
-	mlx_terminate(instance.mlx);
+	mlx_image_to_window(obj.mlx, obj.img_background, 0, 0);
+	mlx_key_hook(obj.mlx, &handle_keypress_esc, obj.mlx);
+	mlx_loop(obj.mlx);
+	mlx_terminate(obj.mlx);
 	return (0);
 }
