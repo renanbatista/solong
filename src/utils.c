@@ -6,7 +6,7 @@
 /*   By: r-afonso < r-afonso@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 18:43:35 by r-afonso          #+#    #+#             */
-/*   Updated: 2023/08/30 14:51:42 by r-afonso         ###   ########.fr       */
+/*   Updated: 2023/08/31 13:55:38 by r-afonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,30 @@ int	ft_atoi(const char *nptr)
 		nptr++;
 	}
 	return (sun * signal);
+}
+
+static void	*ft_memset(void *s, int c, size_t n)
+{
+	char	*p;
+
+	p = (char *) s;
+	while (n > 0)
+	{
+		*(p) = c;
+		p++;
+		n--;
+	}
+	return (s);
+}
+
+void	*ft_calloc(size_t nmemb, size_t size)
+{
+	void	*allocate;
+
+	if ((size * nmemb != 0) && (nmemb * size) / size != nmemb)
+		return (NULL);
+	allocate = malloc(nmemb * size);
+	if (allocate != NULL)
+		ft_memset(allocate, 0, nmemb * size);
+	return (allocate);
 }

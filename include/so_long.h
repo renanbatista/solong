@@ -6,7 +6,7 @@
 /*   By: r-afonso < r-afonso@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 14:52:33 by r-afonso          #+#    #+#             */
-/*   Updated: 2023/08/30 20:51:59 by r-afonso         ###   ########.fr       */
+/*   Updated: 2023/08/31 13:52:33 by r-afonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,6 @@ size_t			ft_strlcpy(char *dst, char *src, size_t size);
 int				handle_initial_windows(t_control *obj, int args_number,
 					char **args);
 int				ft_atoi(const char *nptr);
+void			*ft_calloc(size_t nmemb, size_t size);
 
 #endif
