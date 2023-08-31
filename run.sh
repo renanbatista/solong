@@ -3,4 +3,4 @@
 clear
 make fclean
 make
-./so_long
+./so_long "test.ber" "1024" "768"

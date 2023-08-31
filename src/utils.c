@@ -6,7 +6,7 @@
 /*   By: r-afonso < r-afonso@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 18:43:35 by r-afonso          #+#    #+#             */
-/*   Updated: 2023/08/29 14:27:52 by r-afonso         ###   ########.fr       */
+/*   Updated: 2023/08/30 14:51:42 by r-afonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ size_t	ft_strlcpy(char *dst, char *src, size_t size)
 
 int	ft_atoi(const char *nptr)
 {
-	int	signal;
-	int	sun;
+	int signal;
+	int sun;
 
 	sun = 0;
 	signal = 1;
@@ -62,7 +62,7 @@ int	ft_atoi(const char *nptr)
 	}
 	while (*(nptr) >= 48 && *(nptr) <= 57)
 	{
-		sun = (sun * 10) + *(nptr) - 48;
+		sun = (sun * 10) + *(nptr)-48;
 		nptr++;
 	}
 	return (sun * signal);
