@@ -6,7 +6,7 @@
 /*   By: r-afonso < r-afonso@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 15:32:36 by r-afonso          #+#    #+#             */
-/*   Updated: 2023/08/31 13:44:33 by r-afonso         ###   ########.fr       */
+/*   Updated: 2023/09/05 18:07:15 by r-afonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,11 @@
 int	main(int args_number, char **args)
 {
 	t_control	obj;
+	t_map		*map;
 
-	// obj.window_h = 0;
-	handle_initial_windows(&obj, args_number, args);
-	load_images(&obj);
+	map = ft_calloc(sizeof(t_map), 1);
+	if(!handle_initial_windows(&obj, map, args_number, args))
+		handle_initial_exit(obj, map); // Trato retorno se alocar com erro na inicialização
 	if (!obj.mlx)
 		exit(EXIT_FAILURE);
 	mlx_image_to_window(obj.mlx, obj.img_background, 0, 0);

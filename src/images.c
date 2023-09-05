@@ -6,13 +6,13 @@
 /*   By: r-afonso < r-afonso@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 12:23:43 by r-afonso          #+#    #+#             */
-/*   Updated: 2023/08/30 14:51:59 by r-afonso         ###   ########.fr       */
+/*   Updated: 2023/09/05 18:07:53 by r-afonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 
-void	load_images(t_control *obj)
+int	load_images(t_control *obj)
 {
 	obj->img_background = mlx_texture_to_image(obj->mlx,
 			mlx_load_png("./textures/maps/block.png"));
@@ -24,11 +24,9 @@ void	load_images(t_control *obj)
 			mlx_load_png("./textures/maps/collectable.png"));
 	if (!obj->img_background || !obj->img_pac || !obj->img_block
 		|| !obj->img_collectable)
-		return ;
+		return 0;
 	mlx_resize_image(obj->img_background, 30, 30);
-	// mlx_resize_image(obj->img_pac, 64, 64);
-	// mlx_resize_image(obj->img_block, 64, 64);
-	// mlx_resize_image(obj->img_collectable, 64, 64);
+	return (1);
 }
 
 void	change_image(t_control *obj, char *type, char *path_image)
