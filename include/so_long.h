@@ -6,7 +6,7 @@
 /*   By: r-afonso < r-afonso@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 14:52:33 by r-afonso          #+#    #+#             */
-/*   Updated: 2023/09/05 18:07:59 by r-afonso         ###   ########.fr       */
+/*   Updated: 2023/09/06 21:12:04 by r-afonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ typedef struct s_map
 	struct s_map	*next;
 }					t_map;
 
-void				handle_keypress_esc(mlx_key_data_t keydata, void *mlx);
+void				handle_keypress(t_map map, mlx_key_data_t keydata, void *mlx);
 int				load_images(t_control *obj);
 int					ft_strcmp(const char *str1, const char *str2);
 size_t				ft_strlcpy(char *dst, char *src, size_t size);

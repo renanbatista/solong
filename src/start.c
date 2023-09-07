@@ -6,7 +6,7 @@
 /*   By: r-afonso < r-afonso@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 15:32:36 by r-afonso          #+#    #+#             */
-/*   Updated: 2023/09/05 18:07:15 by r-afonso         ###   ########.fr       */
+/*   Updated: 2023/09/06 21:11:57 by r-afonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	main(int args_number, char **args)
 	if (!obj.mlx)
 		exit(EXIT_FAILURE);
 	mlx_image_to_window(obj.mlx, obj.img_background, 0, 0);
-	mlx_key_hook(obj.mlx, &handle_keypress_esc, obj.mlx);
+	mlx_key_hook(obj.mlx, &handle_keypress, obj.mlx);
 	mlx_loop(obj.mlx);
 	mlx_terminate(obj.mlx);
 	return (0);

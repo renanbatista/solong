@@ -6,7 +6,7 @@
 /*   By: r-afonso < r-afonso@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 18:48:25 by r-afonso          #+#    #+#             */
-/*   Updated: 2023/09/05 18:09:57 by r-afonso         ###   ########.fr       */
+/*   Updated: 2023/09/06 12:32:54 by r-afonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,9 @@
 static int	load_map(t_control *obj, t_map *map, char *map_name)
 {
 	int		fd;
-	int		fail;
 	char	*str;
 	int		count;
 
-	fail = 1;
 	str = ft_strjoin("./maps/", map_name);
 	if (!str)
 		return (0);
@@ -54,12 +52,10 @@ int	handle_initial_windows(t_control *obj, t_map *map, int args_number,
 		obj->mlx = mlx_init(obj->window_w, obj->window_h, "Pac-Man", false);
 	}
 	// 3- Carregar sprites
-	if(!load_images(obj))
+	if (!load_images(obj))
 		return (0);
 	// 3- Carregar muro
-
 	// 4- Carregar coletaveis
-	
 	// 5- Carregar PAC
 	return (1);
 }
