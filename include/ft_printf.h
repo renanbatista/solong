@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: r-afonso < r-afonso@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/11 21:25:37 by r-afonso          #+#    #+#             */
-/*   Updated: 2023/06/11 21:27:33 by r-afonso         ###   ########.fr       */
+/*   Created: 2023/06/18 16:01:15 by r-afonso          #+#    #+#             */
+/*   Updated: 2023/09/10 17:14:41 by r-afonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_BONUS_H
-# define GET_NEXT_LINE_BONUS_H
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
-# include <stdlib.h>
+# include <stdarg.h>
 # include <unistd.h>
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
-# endif
-
-size_t	ft_strlen(char *str);
-char	*ft_strchr(char *s, int c);
-char	*ft_strjoin(char *s1, char *s2);
-char	*get_next_line(int fd);
-char	*allocate_char(size_t size);
+int		ft_printf(const char *str, ...);
+int		convert_to_hexa(char *result, unsigned long number);
+int		utils(char *str, char type, unsigned long number);
+char	*ft_itoa(long int n);
+int		ft_toupper(int c);
+int		ft_tolower(int c);
 
 #endif
