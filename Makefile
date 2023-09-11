@@ -5,21 +5,32 @@ RM = rm -f
 INC = -I./include -I./MLX42/include/MLX42
 MLX42 = ./MLX42/build/libmlx42.a -ldl -lglfw -pthread -lm
 SRCS_DIR = ./src
-FILES = start windows keypress images utils map move get_next_line_utils get_next_line
+SRCS_DIR_GNL = ./src/gnl
+SRCS_DIR_PRINTF = ./src/printf
+FILES = handle_initial_window handle_close_map \
+		handle_list images keypress move utils \
+start validate_map 
+FILES_GNL = get_next_line_utils get_next_line
+FILES_PRINTF = ft_itoa ft_printf utils
+
 OBJS = $(addprefix $(SRCS_DIR)/, $(addsuffix .o, $(FILES)))
+OBJS_GNL = $(addprefix $(SRCS_DIR_GNL)/, $(addsuffix .o, $(FILES_GNL)))
+OBJS_PRINTF = $(addprefix $(SRCS_DIR_PRINTF)/, $(addsuffix .o, $(FILES_PRINTF)))
 
 all: $(NAME)
-	
-%.o: %.c
-	$(CC) $(CFLAGS) $(INC) -c $< -o $@
 
-$(NAME): $(OBJS)
-	$(CC) $(OBJS) $(MLX42) $(CFLAGS) $(INC) -o $(NAME)
+test: $(OBJS) $(OBJS_GNL) $(OBJS_PRINTF)
+	$(CC) $(OBJS) $(OBJS_GNL) $(OBJS_PRINTF) $(MLX42) $(INC) -o $(NAME)
+%.o: %.c
+	$(CC) $(INC) -c $< -o $@
+
+$(NAME): $(OBJS) $(OBJS_GNL) $(OBJS_PRINTF)
+	$(CC) $(OBJS) $(OBJS_GNL) $(OBJS_PRINTF) $(MLX42) $(CFLAGS) $(INC) -o $(NAME)
 
 bonus: all
 
 clean:
-	$(RM) $(OBJS)
+	$(RM) $(OBJS) $(OBJS_GNL) $(OBJS_PRINTF)
 
 fclean: clean
 	$(RM) $(NAME)
