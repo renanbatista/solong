@@ -5,12 +5,12 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
-			"preLaunchTask": "pretask",
-			"name": "(gdb) Launch",
+			"preLaunchTask": "clang build",
+			"name": "Launch",
 			"type": "lldb",
 			"request": "launch",
 			"program": "${workspaceFolder}/so_long",
-			"args": ["teste.ber", "1024", "768"],
+			"args": ["test.ber", "1024", "768"],
 			"cwd": "${fileDirname}/.."
 		}
 	]
