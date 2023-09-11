@@ -6,19 +6,19 @@
 /*   By: r-afonso < r-afonso@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 21:21:30 by r-afonso          #+#    #+#             */
-/*   Updated: 2023/09/06 21:13:27 by r-afonso         ###   ########.fr       */
+/*   Updated: 2023/09/10 23:54:33 by r-afonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 
-void	handle_keypress(t_map map, mlx_key_data_t keydata, void *mlx)
+void	handle_keypress(void *t_c)
 {
-	// printf("Action: %u e %u ",keydata.action, MLX_PRESS);
-	printf("\nKey: %u", keydata.key);
-	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
+	t_control *obj;
+	obj = (t_control *) t_c;
+	if (mlx_is_key_down(obj->mlx, MLX_KEY_ESCAPE))
 	{
-		mlx_terminate((mlx_t *)mlx);
-		printf("%s", "ola");
+		// TODO: fazer o tratamento para free nas demais variveis 
+		mlx_terminate((mlx_t *)obj->mlx);
 	}
 }
