@@ -16,27 +16,28 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-typedef struct s_map
+typedef struct 		s_map
 {
 	char			*row;
 	struct s_map	*next;
 }					t_map;
 
-typedef struct s_control
+typedef struct 		s_control
 {
 	mlx_t			*mlx;
 	t_map			*map;
+	int				moviment[4];
 	mlx_image_t		*img_background;
 	mlx_image_t		*img_pac;
 	mlx_image_t		*img_exit;
 	mlx_image_t		*img_collectable;
 	mlx_image_t		*img_wall;
-	int				load_map_x;
-	int				load_map_y;
-	int				size_col;
-	int				size_row;
-	int				player_x;
-	int				player_y;
+	int				load_map_x; // só usada INICIALMENTE 
+	int				load_map_y; // só usada INICIALMENTE 
+	int				size_x; // tamanho total do das strings na lista
+	int				size_y; // numero de listas
+	int				player_x; // posição na string atual do player
+	int				player_y; // lista atual do player
 	int				window_w;
 	int				window_h;
 }					t_control;

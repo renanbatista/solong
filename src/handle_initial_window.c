@@ -5,12 +5,16 @@ static void	init_variables(t_control *obj)
 {
 	obj->load_map_x = 0;
 	obj->load_map_y = 0;
-	obj->size_col = 0;
-	obj->size_row = 0;
+	obj->size_x = 0;
+	obj->size_y = 0;
 	obj->player_x = 0;
 	obj->player_y = 0;
 	obj->window_w = 0;
 	obj->window_h = 0;
+	obj->moviment[0] = 0;
+	obj->moviment[1] = 0;
+	obj->moviment[2] = 0;
+	obj->moviment[3] = 0;
 }
 static int	load_map(t_control *obj, char *map_name)
 {
@@ -29,8 +33,8 @@ static int	load_map(t_control *obj, char *map_name)
 		str = get_next_line(fd);
 		if (!str)
 			break ;
-		obj->size_row++;
-		obj->size_col = ft_strlen(str);
+		obj->size_y++;
+		obj->size_x = ft_strlen(str);
 		add_new_node_to_last(obj, str);
 	}
 	return (1);
@@ -47,15 +51,20 @@ static int	show_map_with_sprites(t_control *obj)
 		count = 0;
 		while (*(map->row + count))
 		{
-			if (*(map->row + count) == '0' || *(map->row + count) == ' ' || *(map->row + count) == 'C' || *(map->row + count) == 'E')
-				mlx_image_to_window(obj->mlx, obj->img_background,
+			mlx_image_to_window(obj->mlx, obj->img_background,
 						obj->load_map_x, obj->load_map_y);
 			if (*(map->row + count) == '1')
 				mlx_image_to_window(obj->mlx, obj->img_wall, obj->load_map_x,
 						obj->load_map_y);
 			if (*(map->row + count) == 'P')
+			{
 				mlx_image_to_window(obj->mlx, obj->img_pac, obj->load_map_x,
 						obj->load_map_y);
+						if ( obj->load_map_x > 0 )
+							obj->player_x = obj->load_map_x / 30;
+						if ( obj->load_map_y > 0 )
+							obj->player_y = obj->load_map_y / 30;
+			}
 			// TODO: rever se C é de coletavel
 			if (*(map->row + count) == 'C')
 				mlx_image_to_window(obj->mlx, obj->img_collectable,
@@ -93,7 +102,7 @@ int	handle_initial_windows(t_control *obj, int args_number, char **args)
 	// DONE: Carregar sprites no buffer
 	if (!load_images(obj))
 		return (0);
-	// TODO: Montar Mapa com sprites
+	// DONE: Montar Mapa com sprites
 	if (!show_map_with_sprites(obj))
 		return (0);
 	return (1);
