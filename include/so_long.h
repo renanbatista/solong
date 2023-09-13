@@ -40,6 +40,7 @@ typedef struct 		s_control
 	int				player_y; // lista atual do player
 	int				window_w;
 	int				window_h;
+
 }					t_control;
 
 void				handle_keypress(void *obj);
