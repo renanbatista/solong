@@ -15,6 +15,7 @@ static void	init_variables(t_control *obj)
 	obj->moviment[1] = 0;
 	obj->moviment[2] = 0;
 	obj->moviment[3] = 0;
+	obj->moviment_true = 0;
 }
 static int	load_map(t_control *obj, char *map_name)
 {
