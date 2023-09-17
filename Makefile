@@ -4,12 +4,13 @@ CFLAGS = -Wall -Wextra -Werror
 RM = rm -f
 INC = -I./include -I./MLX42/include/MLX42
 MLX42 = ./MLX42/build/libmlx42.a -ldl -lglfw -pthread -lm
+LEAKS = valgrind --leak-check=full --show-leak-kinds=all -s -q
 SRCS_DIR = ./src
 SRCS_DIR_GNL = ./src/gnl
 SRCS_DIR_PRINTF = ./src/printf
-FILES = handle_initial_window handle_close_map \
-		handle_list images keypress move utils \
-start validate_map 
+FILES = initial_window images keypress \
+		validate utils start validate_map \
+		ft_atoi 
 FILES_GNL = get_next_line_utils get_next_line
 FILES_PRINTF = ft_itoa ft_printf utils
 
@@ -19,8 +20,6 @@ OBJS_PRINTF = $(addprefix $(SRCS_DIR_PRINTF)/, $(addsuffix .o, $(FILES_PRINTF)))
 
 all: $(NAME)
 
-test: $(OBJS) $(OBJS_GNL) $(OBJS_PRINTF)
-	$(CC) $(OBJS) $(OBJS_GNL) $(OBJS_PRINTF) $(MLX42) $(INC) -o $(NAME)
 %.o: %.c
 	$(CC) $(INC) -c $< -o $@
 

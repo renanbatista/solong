@@ -11,19 +11,20 @@
                 "-pthread",
                 "-lm",
                 "-g",
-                "${file}",
-                "handle_initial_window.c",
-                "handle_close_map.c",
-                "handle_list.c",
+                // "${file}",
+                "start.c",
+                "initial_window.c",
                 "images.c",
                 "keypress.c",
-                "move.c",
+                "validate.c",
+                "validate_map.c",
                 "utils.c", 
                 "gnl/get_next_line.c",
                 "gnl/get_next_line_utils.c",
                 "printf/ft_itoa.c",
                 "printf/ft_printf.c",
                 "printf/utils.c",
+                "ft_atoi.c",
                 "../MLX42/build/libmlx42.a",
                 "-I./include",
                 "-I./MLX42/include/MLX42",
@@ -33,9 +34,6 @@
             "options": {
                 "cwd": "${fileDirname}"
             },
-            "problemMatcher": [
-                "$gcc"
-            ],
             "group": {
                 "kind": "build",
                 "isDefault": true

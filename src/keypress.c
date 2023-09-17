@@ -6,13 +6,14 @@
 /*   By: r-afonso < r-afonso@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 21:21:30 by r-afonso          #+#    #+#             */
-/*   Updated: 2023/09/14 14:24:01 by r-afonso         ###   ########.fr       */
+/*   Updated: 2023/09/16 21:56:53 by r-afonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
+#include <stdbool.h>
 
-static void validate_moviment_ads(t_control *obj, t_map *map)
+static void	validate_moviment_ads(t_control *obj, t_map *map)
 {
 	if (obj->player_x != 0 && *(map->row + obj->player_x - 1) != '1')
 		obj->moviment[0] = 1;
@@ -48,36 +49,59 @@ static void	validate_moviment_w(t_control *obj)
 	validate_moviment_ads(obj, map->next);
 }
 
-static void	rewrite_player(t_control *obj)
+static void	rewrite_player(t_control *obj, char type_moviment)
 {
-	mlx_image_to_window(obj->mlx, obj->img_pac, obj->load_map_x,
-	obj->load_map_y);
-	if ( obj->load_map_x > 0 )
-		obj->player_x = obj->load_map_x / 30;
-	if ( obj->load_map_y > 0 )
-		obj->player_y = obj->load_map_y / 30;
-	return;
+	if (type_moviment == 'w')
+	{
+		obj->i_pac->instances->y -= 30;
+		obj->player_y -= 1;
+	}
+	else if (type_moviment == 'a')
+	{
+		obj->i_pac->instances->x -= 30;
+		obj->player_x -= 1;
+	}
+	else if (type_moviment == 'd')
+	{
+		obj->i_pac->instances->x += 30;
+		obj->player_x += 1;
+	}
+	else if (type_moviment == 's')
+	{
+		obj->i_pac->instances->y += 30;
+		obj->player_y += 1;
+	}
 }
 
-void	handle_keypress(void *t_c)
+void	handle_keypress(mlx_key_data_t keydata, void *param)
 {
 	t_control	*obj;
 
-	obj = (t_control *)t_c;
-	validate_moviment_w(obj);
-	obj->moviment_true = 0;
-	if (mlx_is_key_down(obj->mlx, MLX_KEY_ESCAPE))
+	obj = (t_control *)param;
+	obj->move_t = 0;
+	if (mlx_is_key_down(obj->mlx, MLX_KEY_W) || mlx_is_key_down(obj->mlx,
+			MLX_KEY_A) || mlx_is_key_down(obj->mlx, MLX_KEY_S)
+		|| mlx_is_key_down(obj->mlx, MLX_KEY_D))
 	{
-		// TODO: fazer o tratamento para free nas demais variveis
-		mlx_terminate((mlx_t *)obj->mlx);
+		validate_moviment_w(obj);
+		if (keydata.key == MLX_KEY_W && *(obj->moviment + 1) && ++obj->move_t)
+			rewrite_player(obj, 'w');
+		if (keydata.key == MLX_KEY_A && *(obj->moviment + 0) && ++obj->move_t)
+			rewrite_player(obj, 'a');
+		if (keydata.key == MLX_KEY_D && *(obj->moviment + 2) && ++obj->move_t)
+			rewrite_player(obj, 'd');
+		if (keydata.key == MLX_KEY_S && *(obj->moviment + 3) && ++obj->move_t)
+			rewrite_player(obj, 's');
+		validate_collectable(obj);
+		validate_exit(obj);
 	}
-	else if (mlx_is_key_down(obj->mlx, MLX_KEY_W && *(obj->moviment + 1)) && ++obj->moviment_true)
-		obj->img_pac->instances[0].y += 1;
-	else if (mlx_is_key_down(obj->mlx, MLX_KEY_A && *(obj->moviment + 0)) && ++obj->moviment_true)
-		obj->img_pac->instances[0].x -= 1;
-	else if (mlx_is_key_down(obj->mlx, MLX_KEY_D && *(obj->moviment + 2)) && ++obj->moviment_true)
-		obj->img_pac->instances[0].x += 1;
-	else if (mlx_is_key_down(obj->mlx, MLX_KEY_S && *(obj->moviment + 3)) && ++obj->moviment_true)
-		obj->img_pac->instances[0].y -= 1;
-	rewrite_player(obj);
+}
+
+void	handle_keypress_esc(void *param)
+{
+	t_control *obj;
+
+	obj = (t_control *)param;
+	if (mlx_is_key_down(obj->mlx, MLX_KEY_ESCAPE))
+		handle_close(obj);
 }

@@ -6,7 +6,7 @@
 /*   By: r-afonso < r-afonso@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 21:29:58 by r-afonso          #+#    #+#             */
-/*   Updated: 2023/09/09 11:32:30 by r-afonso         ###   ########.fr       */
+/*   Updated: 2023/09/17 02:12:06 by r-afonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,15 +89,15 @@ char	*rebuild_after_newline(char *save_buffer)
 
 char	*get_next_line(int fd)
 {
-	static char	*save_buffer[4096];
+	static char	*save_buffer;
 	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	save_buffer[fd] = get_read(fd, save_buffer[fd]);
-	if (!save_buffer[fd])
+	save_buffer = get_read(fd, save_buffer);
+	if (!save_buffer)
 		return (NULL);
-	line = get_last_or_new_line(save_buffer[fd]);
-	save_buffer[fd] = rebuild_after_newline(save_buffer[fd]);
+	line = get_last_or_new_line(save_buffer);
+	save_buffer = rebuild_after_newline(save_buffer);
 	return (line);
 }

@@ -6,7 +6,7 @@
 /*   By: r-afonso < r-afonso@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 21:29:34 by r-afonso          #+#    #+#             */
-/*   Updated: 2023/09/10 23:16:50 by r-afonso         ###   ########.fr       */
+/*   Updated: 2023/09/17 02:11:33 by r-afonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	while (*(s2 + sub_index) != '\0')
 		*(str + index++) = *(s2 + sub_index++);
 	*(str + ft_strlen(s1) + ft_strlen(s2)) = '\0';
+	free(s1);
 	return (str);
 }
 
