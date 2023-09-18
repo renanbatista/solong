@@ -1,5 +1,4 @@
 #include "../include/so_long.h"
-#include <stdint.h>
 
 static void	init_variables(t_control *obj)
 {
@@ -9,13 +8,19 @@ static void	init_variables(t_control *obj)
 	obj->size_y = 0;
 	obj->player_x = 0;
 	obj->player_y = 0;
-	obj->window_w = 0;
-	obj->window_h = 0;
+	obj->window_w = 1024;
+	obj->window_h = 1024;
 	obj->moviment[0] = 0;
 	obj->moviment[1] = 0;
 	obj->moviment[2] = 0;
 	obj->moviment[3] = 0;
 	obj->move_t = 0;
+	obj->fail_map_validate = 0;
+	obj->n_moviments = 0;
+	obj->v_exit = 0;
+	obj->v_collect = 0;
+	obj->v_player = 0;
+	obj->v_retangle = 0;
 }
 static int	load_map(t_control *obj, char *map_name)
 {
@@ -26,9 +31,12 @@ static int	load_map(t_control *obj, char *map_name)
 	if (!str)
 		return (0);
 	fd = open(str, O_RDONLY);
-	if (fd == -1)
-		return (0);
 	free(str);
+	if (fd == -1)
+	{
+		print_msg(1, obj);
+		return (0);
+	}
 	while (true)
 	{
 		str = get_next_line(fd);
@@ -84,25 +92,25 @@ static void	show_map_with_sprites(t_control *obj)
 		obj->load_map_x = 0;
 	}
 	obj->i_pac->instances->z = obj->i_wall->instances[obj->i_wall->count - 1].z;
+	obj->coll_for_exit = obj->i_coll->count;
 }
 
 int	handle_initial_windows(t_control *obj, int args_number, char **args)
 {
-	char *str;
-	
+	char	*str;
+
 	init_variables(obj);
-	if (!load_map(obj, *(args + 1)))
-		return (0);
-	// TODO: Validar mapa
-	if (args_number >= 3)
+	if (args_number == 4)
 	{
 		obj->window_w = ft_atoi(*(args + 2));
 		obj->window_h = ft_atoi(*(args + 3));
-		obj->mlx = mlx_init(obj->window_w, obj->window_h, "Pac-Man", false);
 	}
-	if (!load_images(obj))
+	if (!load_map(obj, *(args + 1)))
 		return (0);
+	if (!handle_validate_map(obj))
+		return (0);
+	obj->mlx = mlx_init(obj->window_w, obj->window_h, "Pac-Man", false);
+	load_images(obj);
 	show_map_with_sprites(obj);
-	obj->coll_for_exit = obj->i_coll->count;
 	return (1);
 }

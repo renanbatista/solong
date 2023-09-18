@@ -17,7 +17,7 @@
                 "images.c",
                 "keypress.c",
                 "validate.c",
-                "validate_map.c",
+                "initial_validate_map.c",
                 "utils.c", 
                 "gnl/get_next_line.c",
                 "gnl/get_next_line_utils.c",

@@ -28,3 +28,39 @@ void	validate_exit(t_control *obj)
 			handle_close(obj);	
 	}
 }
+
+static void	validate_moviment_ads(t_control *obj, t_map *map)
+{
+	if (obj->player_x != 0 && *(map->row + obj->player_x - 1) != '1')
+		obj->moviment[0] = 1;
+	if (obj->player_x < obj->size_x && *(map->row + obj->player_x + 1) != '1')
+		obj->moviment[2] = 1;
+	if (map->next)
+	{
+		map = map->next;
+		if (map->next && *(map->row + obj->player_x) != '1')
+			obj->moviment[3] = 1;
+	}
+}
+
+void	validate_moviment_w(t_control *obj)
+{
+	int		count;
+	t_map	*map;
+
+	map = obj->map;
+	count = -1;
+	while (count++, count < 4)
+		obj->moviment[count] = 0;
+	if (obj->player_y == 0)
+		obj->moviment[1] = 0;
+	else
+	{
+		count = 0;
+		while (count++, count < obj->player_y)
+			map = map->next;
+		if (*(map->row + obj->player_x) != '1')
+			obj->moviment[1] = 1;
+	}
+	validate_moviment_ads(obj, map->next);
+}

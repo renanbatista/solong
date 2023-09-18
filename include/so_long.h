@@ -10,11 +10,10 @@
 # include "get_next_line.h"
 # include <X11/X.h>
 # include <X11/keysym.h>
+# include <errno.h>
 # include <fcntl.h>
-# include <stdarg.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
+# include <stdbool.h>
+# include <string.h>
 
 typedef struct s_map
 {
@@ -47,12 +46,18 @@ typedef struct s_control
 	int				window_h;
 	int				move_t;
 	int				coll_for_exit;
+	int				fail_map_validate;
+	int				n_moviments;
+	int				v_exit;
+	int				v_collect;
+	int				v_player;
+	int				v_retangle;
 
 }					t_control;
 
 void				handle_keypress(mlx_key_data_t keydata, void *param);
 void				handle_close(void *param);
-int					load_images(t_control *obj);
+void				load_images(t_control *obj);
 int					handle_initial_windows(t_control *obj, int args_number,
 						char **args);
 void				*ft_calloc(size_t nmemb, size_t size);
@@ -63,5 +68,8 @@ void				handle_keypress_esc(void *param);
 void				make_free_images(t_control *obj);
 char				*join_str(char *str, char *str2);
 int					ft_atoi(const char *nptr);
+void				validate_moviment_w(t_control *obj);
+int					handle_validate_map(t_control *obj);
+void				print_msg(int type,  t_control *obj);
 
 #endif

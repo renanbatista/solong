@@ -10,7 +10,7 @@
 			"type": "lldb",
 			"request": "launch",
 			"program": "${workspaceFolder}/so_long",
-			"args": ["test.ber", "600", "500"],
+			"args": ["test.ber", "1024", "1024"],
 			"cwd": "${fileDirname}/.."
 		}
 	]

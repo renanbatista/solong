@@ -6,13 +6,13 @@
 /*   By: r-afonso < r-afonso@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 12:23:43 by r-afonso          #+#    #+#             */
-/*   Updated: 2023/09/17 02:22:37 by r-afonso         ###   ########.fr       */
+/*   Updated: 2023/09/17 20:15:05 by r-afonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 
-int	load_images(t_control *obj)
+void	load_images(t_control *obj)
 {
 	obj->t_pac = mlx_load_png("./textures/pac/pac_2.png");
 	obj->t_coll = mlx_load_png("./textures/maps/collectable.png");
@@ -24,16 +24,11 @@ int	load_images(t_control *obj)
 	obj->i_exit = mlx_texture_to_image(obj->mlx, obj->t_exit);
 	obj->i_back = mlx_texture_to_image(obj->mlx, obj->t_back);
 	obj->i_wall = mlx_texture_to_image(obj->mlx, obj->t_wall);
-	if (!obj->i_back || !obj->i_pac || !obj->i_coll || !obj->i_exit
-		|| !obj->i_wall)
-		return (0);
-	// mlx_resize_image(obj->img_background, 30, 30);
 	mlx_resize_image(obj->i_pac, 30, 30);
 	mlx_resize_image(obj->i_coll, 30, 30);
 	mlx_resize_image(obj->i_back, 30, 30);
 	mlx_resize_image(obj->i_exit, 30, 30);
 	mlx_resize_image(obj->i_wall, 30, 30);
-	return (1);
 }
 
 void	make_free_images(t_control *obj)

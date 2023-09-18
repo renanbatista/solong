@@ -6,48 +6,12 @@
 /*   By: r-afonso < r-afonso@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 21:21:30 by r-afonso          #+#    #+#             */
-/*   Updated: 2023/09/16 21:56:53 by r-afonso         ###   ########.fr       */
+/*   Updated: 2023/09/17 20:53:39 by r-afonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 #include <stdbool.h>
-
-static void	validate_moviment_ads(t_control *obj, t_map *map)
-{
-	if (obj->player_x != 0 && *(map->row + obj->player_x - 1) != '1')
-		obj->moviment[0] = 1;
-	if (obj->player_x < obj->size_x && *(map->row + obj->player_x + 1) != '1')
-		obj->moviment[2] = 1;
-	if (map->next)
-	{
-		map = map->next;
-		if (map->next && *(map->row + obj->player_x) != '1')
-			obj->moviment[3] = 1;
-	}
-}
-
-static void	validate_moviment_w(t_control *obj)
-{
-	int		count;
-	t_map	*map;
-
-	map = obj->map;
-	count = -1;
-	while (count++, count < 4)
-		obj->moviment[count] = 0;
-	if (obj->player_y == 0)
-		obj->moviment[1] = 0;
-	else
-	{
-		count = 0;
-		while (count++, count < obj->player_y)
-			map = map->next;
-		if (*(map->row + obj->player_x) != '1')
-			obj->moviment[1] = 1;
-	}
-	validate_moviment_ads(obj, map->next);
-}
 
 static void	rewrite_player(t_control *obj, char type_moviment)
 {
@@ -71,6 +35,8 @@ static void	rewrite_player(t_control *obj, char type_moviment)
 		obj->i_pac->instances->y += 30;
 		obj->player_y += 1;
 	}
+	obj->n_moviments++;
+	print_msg(8, obj);
 }
 
 void	handle_keypress(mlx_key_data_t keydata, void *param)
@@ -95,6 +61,34 @@ void	handle_keypress(mlx_key_data_t keydata, void *param)
 		validate_collectable(obj);
 		validate_exit(obj);
 	}
+}
+
+void	handle_close(void *param)
+{
+	t_control	*obj;
+	t_map		*map;
+	t_map		*swap_map;
+
+	obj = (t_control *)param;
+	map = obj->map;
+	if(!obj->fail_map_validate)
+	{
+		make_free_images(obj);
+		mlx_close_window(obj->mlx);	
+	}
+	while (map->row)
+	{
+		free(map->row);
+		if (!map->next)
+		{
+			free(map);
+			break ;
+		}
+		swap_map = map->next;
+		free(map);
+		map = swap_map;
+	}
+	obj->map = NULL;
 }
 
 void	handle_keypress_esc(void *param)

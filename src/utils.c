@@ -6,7 +6,7 @@
 /*   By: r-afonso < r-afonso@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 18:43:35 by r-afonso          #+#    #+#             */
-/*   Updated: 2023/09/17 02:32:35 by r-afonso         ###   ########.fr       */
+/*   Updated: 2023/09/17 23:39:10 by r-afonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	*ft_calloc(size_t nmemb, size_t size)
 
 void	add_new_node_to_last(t_control *obj, char *str)
 {
-	// TODO: TEM LEAK
 	t_map	*new_map;
 	t_map	*actual;
 
@@ -56,34 +55,6 @@ void	add_new_node_to_last(t_control *obj, char *str)
 	}
 	else
 		obj->map = new_map;
-}
-
-void	handle_close(void *param)
-{
-	t_control	*obj;
-	t_map		*map;
-	t_map		*swap_map;
-
-	obj = (t_control *)param;
-	map = obj->map;
-	make_free_images(obj);
-	mlx_close_window(obj->mlx);
-	while (map->row)
-	{
-		free(map->row);
-		if (map->next)
-		{
-			swap_map = map->next;
-			free(map);
-			map = swap_map;
-		}
-		else
-		{
-			free(map);
-			break ;
-		}
-	}
-	obj->map = NULL;
 }
 
 char	*join_str(char *str, char *str2)
@@ -102,4 +73,26 @@ char	*join_str(char *str, char *str2)
 	while (++count2, str2[count2])
 		str_new[count++] = str2[count2];
 	return (str_new);
+}
+
+void	print_msg(int type, t_control *obj)
+{
+	if (type == 1 || type == 2 || type == 3 || type == 4 || type == 5
+		|| type == 6 || type == 7)
+		ft_printf("\n%s", "ERROR: ");
+	if (type == 1)
+		ft_printf("\nMap does not exist - %s\n", strerror(errno));
+	if (type == 2)
+		ft_printf("\nThe map needs to be a rectangle.");
+	if (type == 3)
+	{
+		ft_printf("\nThe map needs to 1 player, at least 1 collectible");
+		ft_printf(" and 1 exit.");
+	}
+	if (type == 5)
+		ft_printf("\nThe map needs to be closed by walls.");
+	if (type == 6)
+		ft_printf("Impossible to collect collectibles and finish the game.");
+	if (type == 8)
+		ft_printf("\nNumbers of Moviment: %i", obj->n_moviments);
 }
