@@ -6,7 +6,7 @@
 /*   By: r-afonso < r-afonso@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 18:07:12 by r-afonso          #+#    #+#             */
-/*   Updated: 2023/09/18 20:21:55 by r-afonso         ###   ########.fr       */
+/*   Updated: 2023/09/19 12:30:58 by r-afonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,13 @@ static int	validate_retangle(t_control *obj)
 		if (!count)
 			count = ft_strlen(map->row);
 		if (count != ft_strlen(map->row))
-			obj->v_retangle++;
+			obj->v_retangle = 1;
 		if (map->next)
 			map = map->next;
 		else
 		{
 			if (count == ft_strlen(map->row) + 1)
-				obj->v_retangle--;
+				obj->v_retangle = 0;
 			break ;
 		}
 	}
@@ -127,6 +127,11 @@ int	handle_validate_map(t_control *obj)
 	if (obj->size_y < 3 || !validate_components(obj) || !validate_retangle(obj)
 		|| !validate_closed_wall(obj) || !validate_set(obj))
 		return (0);
-	// TODO: Validar se mapa pode ser vencido
+	handle_ff(obj, obj->array,obj->player_x,obj->player_y);
+	if (!validate_map_ff(obj))
+	{
+		print_msg(9, obj);
+		return (0);
+	}
 	return (1);
 }

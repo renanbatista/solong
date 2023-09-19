@@ -25,7 +25,6 @@ typedef struct s_control
 {
 	mlx_t			*mlx;
 	t_map			*map;
-	int				moviment[4];
 	mlx_image_t		*i_back;
 	mlx_image_t		*i_pac;
 	mlx_image_t		*i_exit;
@@ -36,6 +35,8 @@ typedef struct s_control
 	mlx_texture_t	*t_exit;
 	mlx_texture_t	*t_coll;
 	mlx_texture_t	*t_wall;
+	char			**array;
+	int				moviment[4];
 	int				lm_x;
 	int				lm_y;
 	int				size_x;
@@ -72,5 +73,8 @@ void				validate_moviment_w(t_control *obj);
 int					handle_validate_map(t_control *obj);
 void				print_msg(int type, t_control *obj);
 void				ft_bzero(void *s, size_t n);
+int					handle_ff(t_control *obj, char **map, int x, int y);
+void				free_array(t_control *obj);
+int					validate_map_ff(t_control *obj);
 
 #endif

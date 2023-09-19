@@ -6,35 +6,46 @@
 /*   By: r-afonso < r-afonso@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 18:43:35 by r-afonso          #+#    #+#             */
-/*   Updated: 2023/09/18 19:33:46 by r-afonso         ###   ########.fr       */
+/*   Updated: 2023/09/19 12:18:47 by r-afonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 
-static void	*ft_memset(void *s, int c, size_t n)
+void	free_array(t_control *obj)
 {
-	char	*p;
+	int		x;
+	int		y;
+	int 	count;
 
-	p = (char *)s;
-	while (n > 0)
-	{
-		*(p) = c;
-		p++;
-		n--;
-	}
-	return (s);
+	count = -1;
+	x = -1;
+	while (++x, x < obj->size_y)
+		free(obj->array[x]);
+	free(obj->array);
+	obj->array = NULL;
 }
 
 void	*ft_calloc(size_t nmemb, size_t size)
 {
+	char	*p;
 	void	*allocate;
+	int		n;
 
 	if ((size * nmemb != 0) && (nmemb * size) / size != nmemb)
 		return (NULL);
 	allocate = malloc(nmemb * size);
 	if (allocate != NULL)
-		ft_memset(allocate, 0, nmemb * size);
+	{
+		n = nmemb * size;
+		p = (char *)allocate;
+		while (n > 0)
+		{
+			*(p) = 0;
+			p++;
+			n--;
+		}
+	}
 	return (allocate);
 }
 
@@ -78,25 +89,28 @@ char	*join_str(char *str, char *str2)
 void	print_msg(int type, t_control *obj)
 {
 	if (type == 1 || type == 2 || type == 3 || type == 4 || type == 5
-		|| type == 6 || type == 7)
+		|| type == 6 || type == 7 || type == 9)
 		ft_printf("\n%s", "ERROR: ");
 	if (type == 1)
-		ft_printf("\nMap does not exist - %s\n", strerror(errno));
+		ft_printf("Map does not exist - %s\n", strerror(errno));
 	if (type == 2)
-		ft_printf("\nThe map needs to be a rectangle.");
+		ft_printf("The map needs to be a rectangle.");
 	if (type == 3)
 	{
-		ft_printf("\nThe map needs to 1 player, at least 1 collectible");
+		ft_printf("The map needs to 1 player, at least 1 collectible");
 		ft_printf(" and 1 exit.");
 	}
 	if (type == 4)
-		ft_printf("\nThe map needs has at least three lines.");
+		ft_printf("The map needs has at least three lines.");
 	if (type == 5)
-		ft_printf("\nThe map needs to be closed by walls.");
+		ft_printf("The map needs to be closed by walls.");
 	if (type == 6)
 		ft_printf("Impossible to collect collectibles and finish the game.");
 	if (type == 7)
 		ft_printf("The map has invalid caracter");
 	if (type == 8)
 		ft_printf("\nNumbers of Moviment: %i", obj->n_moviments);
+	if (type == 9)
+		ft_printf("Invalid Map");
+		
 }

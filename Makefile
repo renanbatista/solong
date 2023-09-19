@@ -5,13 +5,13 @@ RM = rm -f
 INC = -I./include -I./MLX42/include/MLX42
 MLX42 = ./MLX42/build/libmlx42.a -ldl -lglfw -pthread -lm
 # LEAKS = valgrind --leak-check=full --track-origins=yes --suppressions=./MLX42/suppress.sup ./so_long  "test.ber" "1024" "768"
-LEAKS = valgrind ./so_long  "test.ber" "1024" "768"
+LEAKS = valgrind --suppressions=./MLX42/suppress.sup ./so_long  "test.ber" "1024" "768"
 SRCS_DIR = ./src
 SRCS_DIR_GNL = ./src/gnl
 SRCS_DIR_PRINTF = ./src/printf
 FILES = initial_window images keypress \
 		validate utils start initial_validate_map \
-		utils_others 
+		utils_others flood_fill
 FILES_GNL = get_next_line_utils get_next_line
 FILES_PRINTF = ft_itoa ft_printf utils
 
@@ -26,7 +26,7 @@ valgrind: $(OBJS) $(OBJS_GNL) $(OBJS_PRINTF)
 	$(LEAKS)
 
 run: fclean all
-	./so_long "without_zero.ber" "1024" "768"
+	./so_long "map_bigger.ber" "1424" "768"
 
 %.o: %.c
 	$(CC) $(INC) -c $< -o $@

@@ -6,7 +6,7 @@
 /*   By: r-afonso < r-afonso@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 21:21:30 by r-afonso          #+#    #+#             */
-/*   Updated: 2023/09/17 20:53:39 by r-afonso         ###   ########.fr       */
+/*   Updated: 2023/09/19 11:26:51 by r-afonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ void	handle_close(void *param)
 		free(map);
 		map = swap_map;
 	}
+	free_array(obj);
 	obj->map = NULL;
 }
 
