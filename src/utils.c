@@ -6,7 +6,7 @@
 /*   By: r-afonso < r-afonso@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 18:43:35 by r-afonso          #+#    #+#             */
-/*   Updated: 2023/09/17 23:39:10 by r-afonso         ###   ########.fr       */
+/*   Updated: 2023/09/18 19:33:46 by r-afonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,10 +89,14 @@ void	print_msg(int type, t_control *obj)
 		ft_printf("\nThe map needs to 1 player, at least 1 collectible");
 		ft_printf(" and 1 exit.");
 	}
+	if (type == 4)
+		ft_printf("\nThe map needs has at least three lines.");
 	if (type == 5)
 		ft_printf("\nThe map needs to be closed by walls.");
 	if (type == 6)
 		ft_printf("Impossible to collect collectibles and finish the game.");
+	if (type == 7)
+		ft_printf("The map has invalid caracter");
 	if (type == 8)
 		ft_printf("\nNumbers of Moviment: %i", obj->n_moviments);
 }

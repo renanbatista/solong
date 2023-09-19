@@ -11,8 +11,11 @@ void	validate_collectable(t_control *obj)
 		if ((obj->i_pac->instances->x == obj->i_coll->instances[count].x)
 			&& (obj->i_pac->instances->y == obj->i_coll->instances[count].y))
 		{
-			obj->i_coll->instances[count].enabled = false;
-			obj->coll_for_exit--;
+			if(obj->i_coll->instances[count].enabled)
+			{
+				obj->i_coll->instances[count].enabled = false;
+				obj->coll_for_exit--;
+			}
 		}
 		if (obj->coll_for_exit == 0)
 			obj->i_exit->instances->enabled = true;

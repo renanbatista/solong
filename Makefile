@@ -11,7 +11,7 @@ SRCS_DIR_GNL = ./src/gnl
 SRCS_DIR_PRINTF = ./src/printf
 FILES = initial_window images keypress \
 		validate utils start initial_validate_map \
-		ft_atoi 
+		utils_others 
 FILES_GNL = get_next_line_utils get_next_line
 FILES_PRINTF = ft_itoa ft_printf utils
 
@@ -24,6 +24,9 @@ all: $(NAME)
 valgrind: $(OBJS) $(OBJS_GNL) $(OBJS_PRINTF)
 	$(CC) $(OBJS) $(OBJS_GNL) $(OBJS_PRINTF) $(MLX42) $(CFLAGS) $(INC) -o $(NAME) 
 	$(LEAKS)
+
+run: fclean all
+	./so_long "without_zero.ber" "1024" "768"
 
 %.o: %.c
 	$(CC) $(INC) -c $< -o $@

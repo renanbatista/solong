@@ -36,8 +36,8 @@ typedef struct s_control
 	mlx_texture_t	*t_exit;
 	mlx_texture_t	*t_coll;
 	mlx_texture_t	*t_wall;
-	int				load_map_x;
-	int				load_map_y;
+	int				lm_x;
+	int				lm_y;
 	int				size_x;
 	int				size_y;
 	int				player_x;
@@ -52,7 +52,7 @@ typedef struct s_control
 	int				v_collect;
 	int				v_player;
 	int				v_retangle;
-
+	int				v_wall;
 }					t_control;
 
 void				handle_keypress(mlx_key_data_t keydata, void *param);
@@ -70,6 +70,7 @@ char				*join_str(char *str, char *str2);
 int					ft_atoi(const char *nptr);
 void				validate_moviment_w(t_control *obj);
 int					handle_validate_map(t_control *obj);
-void				print_msg(int type,  t_control *obj);
+void				print_msg(int type, t_control *obj);
+void				ft_bzero(void *s, size_t n);
 
 #endif

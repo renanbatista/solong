@@ -24,7 +24,7 @@
                 "printf/ft_itoa.c",
                 "printf/ft_printf.c",
                 "printf/utils.c",
-                "ft_atoi.c",
+                "utils_others.c",
                 "../MLX42/build/libmlx42.a",
                 "-I./include",
                 "-I./MLX42/include/MLX42",
