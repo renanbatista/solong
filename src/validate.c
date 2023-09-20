@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   validate.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: r-afonso < r-afonso@student.42sp.org.br    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/19 22:29:03 by r-afonso          #+#    #+#             */
+/*   Updated: 2023/09/19 22:29:16 by r-afonso         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/so_long.h"
 
 void	validate_collectable(t_control *obj)
@@ -11,14 +23,12 @@ void	validate_collectable(t_control *obj)
 		if ((obj->i_pac->instances->x == obj->i_coll->instances[count].x)
 			&& (obj->i_pac->instances->y == obj->i_coll->instances[count].y))
 		{
-			if(obj->i_coll->instances[count].enabled)
+			if (obj->i_coll->instances[count].enabled)
 			{
 				obj->i_coll->instances[count].enabled = false;
 				obj->coll_for_exit--;
 			}
 		}
-		if (obj->coll_for_exit == 0)
-			obj->i_exit->instances->enabled = true;
 	}
 }
 
@@ -26,9 +36,9 @@ void	validate_exit(t_control *obj)
 {
 	if (obj->coll_for_exit == 0)
 	{
-		if (obj->player_x * 30 == obj->i_exit->instances->x
-			&& obj->player_y * 30 == obj->i_exit->instances->y)
-			handle_close(obj);	
+		if (obj->player_x * 30 == obj->i_exit->instances->x && obj->player_y
+			* 30 == obj->i_exit->instances->y)
+			handle_close(obj);
 	}
 }
 

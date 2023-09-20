@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   initial_window.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: r-afonso < r-afonso@student.42sp.org.br    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/19 17:30:37 by r-afonso          #+#    #+#             */
+/*   Updated: 2023/09/19 23:30:23 by r-afonso         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/so_long.h"
 
 static void	add_list_to_array(t_control *obj)
@@ -34,6 +46,12 @@ static int	load_map(t_control *obj, char *map_name)
 	int		fd;
 	char	*str;
 
+	if (map_name[ft_strlen(map_name) - 1] != 'r' || map_name[ft_strlen(map_name)
+			- 2] != 'e' || map_name[ft_strlen(map_name) - 3] != 'b')
+	{
+		print_msg(1, obj);
+		return (0);
+	}
 	str = join_str("./maps/", map_name);
 	if (!str)
 		return (0);
@@ -44,29 +62,22 @@ static int	load_map(t_control *obj, char *map_name)
 		print_msg(1, obj);
 		return (0);
 	}
-	while (true)
-	{
-		str = get_next_line(fd);
-		if (!str)
-			break ;
-		obj->size_y++;
-		obj->size_x = ft_strlen(str);
-		add_new_node_to_last(obj, str);
-	}
+	get_gnl(str, fd, obj);
+	close(fd);
 	add_list_to_array(obj);
 	return (1);
 }
+
 static void	validate_chars(t_map *map, t_control *obj)
 {
-	int	count;
-
-	count = -1;
-	while (++count, *(map->row + count))
+	obj->temp_cont = -1;
+	while (++obj->temp_cont, *(map->row + obj->temp_cont))
 	{
-		mlx_image_to_window(obj->mlx, obj->i_back, obj->lm_x, obj->lm_y);
-		if (*(map->row + count) == '1')
+		if (map->row[obj->temp_cont] != '\n')
+			mlx_image_to_window(obj->mlx, obj->i_back, obj->lm_x, obj->lm_y);
+		if (*(map->row + obj->temp_cont) == '1')
 			mlx_image_to_window(obj->mlx, obj->i_wall, obj->lm_x, obj->lm_y);
-		if (*(map->row + count) == 'P')
+		if (*(map->row + obj->temp_cont) == 'P')
 		{
 			mlx_image_to_window(obj->mlx, obj->i_pac, obj->lm_x, obj->lm_y);
 			if (obj->lm_x > 0)
@@ -74,20 +85,20 @@ static void	validate_chars(t_map *map, t_control *obj)
 			if (obj->lm_y > 0)
 				obj->player_y = obj->lm_y / 30;
 		}
-		if (*(map->row + count) == 'C')
+		if (*(map->row + obj->temp_cont) == 'C')
 			mlx_image_to_window(obj->mlx, obj->i_coll, obj->lm_x, obj->lm_y);
-		if (*(map->row + count) == 'E')
-		{
-			mlx_image_to_window(obj->mlx, obj->i_exit, obj->lm_x, obj->lm_y);
+		if (*(map->row + obj->temp_cont) == 'E'
+			&& !mlx_image_to_window(obj->mlx, obj->i_exit, obj->lm_x, obj->lm_y)
+			&& mlx_image_to_window(obj->mlx, obj->i_exit_1, obj->lm_x,
+				obj->lm_y))
 			obj->i_exit->instances->enabled = false;
-		}
 		obj->lm_x += 30;
 	}
 }
+
 static void	show_map_with_sprites(t_control *obj)
 {
 	t_map	*map;
-	int		count;
 
 	map = obj->map;
 	while (true)
@@ -99,6 +110,7 @@ static void	show_map_with_sprites(t_control *obj)
 		obj->lm_y += 30;
 		obj->lm_x = 0;
 	}
+	obj->i_exit_1->instances->enabled = false;
 	obj->i_pac->instances->z = obj->i_wall->instances[obj->i_wall->count - 1].z;
 	obj->coll_for_exit = obj->i_coll->count;
 }
@@ -107,12 +119,19 @@ int	handle_initial_windows(t_control *obj, int args_number, char **args)
 {
 	char	*str;
 
-	obj->window_w = 1024;
-	obj->window_h = 1024;
 	if (args_number == 4)
 	{
 		obj->window_w = ft_atoi(*(args + 2));
+		if (obj->window_w > 1800)
+			obj->window_w = 1800;
 		obj->window_h = ft_atoi(*(args + 3));
+		if (obj->window_h > 950)
+			obj->window_h = 950;
+	}
+	else
+	{
+		obj->window_w = 700;
+		obj->window_h = 500;
 	}
 	if (!load_map(obj, *(args + 1)))
 		return (0);

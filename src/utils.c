@@ -6,7 +6,7 @@
 /*   By: r-afonso < r-afonso@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 18:43:35 by r-afonso          #+#    #+#             */
-/*   Updated: 2023/09/19 12:18:47 by r-afonso         ###   ########.fr       */
+/*   Updated: 2023/09/19 23:17:10 by r-afonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	free_array(t_control *obj)
 {
-	int		x;
-	int		y;
-	int 	count;
+	int	x;
+	int	y;
+	int	count;
 
 	count = -1;
 	x = -1;
@@ -92,7 +92,7 @@ void	print_msg(int type, t_control *obj)
 		|| type == 6 || type == 7 || type == 9)
 		ft_printf("\n%s", "ERROR: ");
 	if (type == 1)
-		ft_printf("Map does not exist - %s\n", strerror(errno));
+		ft_printf("Map does not exist or extension is not allowed");
 	if (type == 2)
 		ft_printf("The map needs to be a rectangle.");
 	if (type == 3)
@@ -112,5 +112,4 @@ void	print_msg(int type, t_control *obj)
 		ft_printf("\nNumbers of Moviment: %i", obj->n_moviments);
 	if (type == 9)
 		ft_printf("Invalid Map");
-		
 }

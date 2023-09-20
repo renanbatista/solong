@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   so_long.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: r-afonso < r-afonso@student.42sp.org.br    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/19 23:28:21 by r-afonso          #+#    #+#             */
+/*   Updated: 2023/09/19 23:28:22 by r-afonso         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
@@ -10,7 +22,6 @@
 # include "get_next_line.h"
 # include <X11/X.h>
 # include <X11/keysym.h>
-# include <errno.h>
 # include <fcntl.h>
 # include <stdbool.h>
 # include <string.h>
@@ -28,14 +39,17 @@ typedef struct s_control
 	mlx_image_t		*i_back;
 	mlx_image_t		*i_pac;
 	mlx_image_t		*i_exit;
+	mlx_image_t		*i_exit_1;
 	mlx_image_t		*i_coll;
 	mlx_image_t		*i_wall;
 	mlx_texture_t	*t_back;
 	mlx_texture_t	*t_pac;
 	mlx_texture_t	*t_exit;
+	mlx_texture_t	*t_exit_1;
 	mlx_texture_t	*t_coll;
 	mlx_texture_t	*t_wall;
 	char			**array;
+	int				temp_cont;
 	int				moviment[4];
 	int				lm_x;
 	int				lm_y;
@@ -54,6 +68,7 @@ typedef struct s_control
 	int				v_player;
 	int				v_retangle;
 	int				v_wall;
+	int				v_animation;
 }					t_control;
 
 void				handle_keypress(mlx_key_data_t keydata, void *param);
@@ -65,7 +80,7 @@ void				*ft_calloc(size_t nmemb, size_t size);
 void				add_new_node_to_last(t_control *obj, char *str);
 void				validate_collectable(t_control *obj);
 void				validate_exit(t_control *obj);
-void				handle_keypress_esc(void *param);
+void				handle_keypress_or_animation(void *param);
 void				make_free_images(t_control *obj);
 char				*join_str(char *str, char *str2);
 int					ft_atoi(const char *nptr);
@@ -76,5 +91,8 @@ void				ft_bzero(void *s, size_t n);
 int					handle_ff(t_control *obj, char **map, int x, int y);
 void				free_array(t_control *obj);
 int					validate_map_ff(t_control *obj);
+void				print_black(t_map *map, t_control *obj, int count);
+void				handle_animation(t_control *obj);
+void				get_gnl(char *str, int fd, t_control *obj);
 
 #endif

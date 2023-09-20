@@ -6,12 +6,11 @@
 /*   By: r-afonso < r-afonso@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 21:21:30 by r-afonso          #+#    #+#             */
-/*   Updated: 2023/09/19 11:26:51 by r-afonso         ###   ########.fr       */
+/*   Updated: 2023/09/19 22:28:09 by r-afonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
-#include <stdbool.h>
 
 static void	rewrite_player(t_control *obj, char type_moviment)
 {
@@ -71,10 +70,10 @@ void	handle_close(void *param)
 
 	obj = (t_control *)param;
 	map = obj->map;
-	if(!obj->fail_map_validate)
+	if (!obj->fail_map_validate)
 	{
 		make_free_images(obj);
-		mlx_close_window(obj->mlx);	
+		mlx_close_window(obj->mlx);
 	}
 	while (map->row)
 	{
@@ -92,11 +91,30 @@ void	handle_close(void *param)
 	obj->map = NULL;
 }
 
-void	handle_keypress_esc(void *param)
+void	handle_keypress_or_animation(void *param)
 {
-	t_control *obj;
+	t_control	*obj;
 
 	obj = (t_control *)param;
 	if (mlx_is_key_down(obj->mlx, MLX_KEY_ESCAPE))
 		handle_close(obj);
+	if (obj->v_animation == 20)
+	{
+		obj->v_animation = 0;
+		if (obj->coll_for_exit == 0)
+		{
+			if (obj->i_exit_1->instances->enabled == true)
+			{
+				obj->i_exit_1->instances->enabled = false;
+				obj->i_exit->instances->enabled = true;
+			}
+			else if (obj->i_exit->instances->enabled == true)
+			{
+				obj->i_exit->instances->enabled = false;
+				obj->i_exit_1->instances->enabled = true;
+			}
+		}
+	}
+	else
+		obj->v_animation++;
 }

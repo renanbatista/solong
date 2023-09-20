@@ -6,7 +6,7 @@
 /*   By: r-afonso < r-afonso@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 18:43:35 by r-afonso          #+#    #+#             */
-/*   Updated: 2023/09/18 19:01:46 by r-afonso         ###   ########.fr       */
+/*   Updated: 2023/09/19 23:29:45 by r-afonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,27 @@ int	ft_atoi(const char *nptr)
 	}
 	while (*(nptr) >= 48 && *(nptr) <= 57)
 	{
-		sun = (sun * 10) + *(nptr)-48;
+		sun = (sun * 10) + *(nptr) - 48;
 		nptr++;
 	}
 	return (sun * signal);
+}
+
+void	print_black(t_map *map, t_control *obj, int count)
+{
+	if (map->row[count] != '\n')
+		mlx_image_to_window(obj->mlx, obj->i_back, obj->lm_x, obj->lm_y);
+}
+
+void	get_gnl(char *str, int fd, t_control *obj)
+{
+	while (true)
+	{
+		str = get_next_line(fd);
+		if (!str)
+			break ;
+		obj->size_y++;
+		obj->size_x = ft_strlen(str);
+		add_new_node_to_last(obj, str);
+	}
 }
