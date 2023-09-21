@@ -6,42 +6,11 @@
 /*   By: r-afonso < r-afonso@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 18:43:35 by r-afonso          #+#    #+#             */
-/*   Updated: 2023/09/19 23:29:45 by r-afonso         ###   ########.fr       */
+/*   Updated: 2023/09/21 12:21:11 by r-afonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
-
-static int	ft_strcmp(const char *str1, const char *str2)
-{
-	while (*str1 && *str2 && *str1 == *str2)
-	{
-		str1++;
-		str2++;
-	}
-	return (*str1 - *str2);
-}
-
-static size_t	ft_strlcpy(char *dst, char *src, size_t size)
-{
-	size_t	index;
-	size_t	len;
-
-	len = ft_strlen(src);
-	index = 0;
-	if (size == 0)
-		return (len);
-	else
-	{
-		while (--size && *(src + index))
-		{
-			*(dst + index) = *(src + index);
-			index++;
-		}
-		*(dst + index) = '\0';
-	}
-	return (len);
-}
 
 int	ft_atoi(const char *nptr)
 {

@@ -19,8 +19,8 @@ OBJS_PRINTF = $(addprefix $(SRCS_DIR_PRINTF)/, $(addsuffix .o, $(FILES_PRINTF)))
 
 all: $(NAME)
 
-run: fclean all
-	valgrind --leak-check=full ./so_long "test_map.ber"
+run: re
+	./so_long "test_map.ber"
 
 %.o: %.c
 	$(CC) $(INC) -c $< -o $@
