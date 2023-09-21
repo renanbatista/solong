@@ -6,16 +6,12 @@
 /*   By: r-afonso < r-afonso@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 23:28:21 by r-afonso          #+#    #+#             */
-/*   Updated: 2023/09/19 23:28:22 by r-afonso         ###   ########.fr       */
+/*   Updated: 2023/09/20 21:48:02 by r-afonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
-
-# define MLX_ERROR 1
-# define WINDOW_WIDTH 1024
-# define WINDOW_HEIGHT 768
 
 # include "../MLX42/include/MLX42/MLX42.h"
 # include "ft_printf.h"

@@ -6,7 +6,7 @@
 /*   By: r-afonso < r-afonso@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 17:30:37 by r-afonso          #+#    #+#             */
-/*   Updated: 2023/09/20 21:27:32 by r-afonso         ###   ########.fr       */
+/*   Updated: 2023/09/20 21:40:42 by r-afonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static int	load_map(t_control *obj, char *map_name)
 		return (0);
 	}
 	get_gnl(str, fd, obj);
-	close(fd);g
+	close(fd);
 	add_list_to_array(obj);
 	return (1);
 }
