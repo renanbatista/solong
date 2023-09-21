@@ -6,7 +6,7 @@
 /*   By: r-afonso < r-afonso@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 17:30:37 by r-afonso          #+#    #+#             */
-/*   Updated: 2023/09/19 23:30:23 by r-afonso         ###   ########.fr       */
+/*   Updated: 2023/09/20 21:27:32 by r-afonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static int	load_map(t_control *obj, char *map_name)
 		return (0);
 	}
 	get_gnl(str, fd, obj);
-	close(fd);
+	close(fd);g
 	add_list_to_array(obj);
 	return (1);
 }
@@ -122,10 +122,10 @@ int	handle_initial_windows(t_control *obj, int args_number, char **args)
 	if (args_number == 4)
 	{
 		obj->window_w = ft_atoi(*(args + 2));
-		if (obj->window_w > 1800)
+		if (obj->window_w > 1800 || obj->window_w < 500)
 			obj->window_w = 1800;
 		obj->window_h = ft_atoi(*(args + 3));
-		if (obj->window_h > 950)
+		if (obj->window_h > 950 || obj->window_h < 300)
 			obj->window_h = 950;
 	}
 	else
@@ -137,7 +137,7 @@ int	handle_initial_windows(t_control *obj, int args_number, char **args)
 		return (0);
 	if (!handle_validate_map(obj))
 		return (0);
-	obj->mlx = mlx_init(obj->window_w, obj->window_h, "Pac-Man", false);
+	obj->mlx = mlx_init(obj->window_w, obj->window_h, "Pac-Man", true);
 	load_images(obj);
 	show_map_with_sprites(obj);
 	return (1);

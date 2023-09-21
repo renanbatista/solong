@@ -6,7 +6,7 @@
 /*   By: r-afonso < r-afonso@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 18:07:12 by r-afonso          #+#    #+#             */
-/*   Updated: 2023/09/19 22:36:41 by r-afonso         ###   ########.fr       */
+/*   Updated: 2023/09/20 19:10:01 by r-afonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,21 +44,19 @@ static int	validate_components(t_control *obj)
 static int	validate_retangle(t_control *obj)
 {
 	t_map	*map;
-	int		count;
 
 	map = obj->map;
-	count = 0;
 	while (true)
 	{
-		if (!count)
-			count = ft_strlen(map->row);
-		if (count != ft_strlen(map->row))
-			obj->v_retangle = 1;
 		if (map->next)
+		{
+			if (obj->size_x != ft_strlen(map->row) - 1)
+				obj->v_retangle = 1;
 			map = map->next;
+		}
 		else
 		{
-			if (count == ft_strlen(map->row) + 1)
+			if (obj->size_x == ft_strlen(map->row) + 2)
 				obj->v_retangle = 0;
 			break ;
 		}
@@ -126,10 +124,16 @@ int	handle_validate_map(t_control *obj)
 		print_msg(4, obj);
 	if (obj->size_y < 3 || !validate_components(obj) || !validate_retangle(obj)
 		|| !validate_closed_wall(obj) || !validate_set(obj))
+	{
+		obj->fail_map_validate = 1;
+		handle_close(obj);
 		return (0);
+	}
 	handle_ff(obj, obj->array, obj->player_x, obj->player_y);
 	if (!validate_map_ff(obj))
 	{
+		obj->fail_map_validate = 1;
+		handle_close(obj);
 		print_msg(9, obj);
 		return (0);
 	}
